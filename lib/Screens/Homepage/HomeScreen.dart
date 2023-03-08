@@ -50,12 +50,15 @@ class _HomeScreenState extends State<HomeScreen> {
             backgroundColor: Colors.white,
             centerTitle: true,
             automaticallyImplyLeading: false,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+           
+            // title: 
+            // titleSpacing: 5,
+            actions: [
+              Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+
               children: [
-                const SizedBox(
-                  width: 30,
-                ),
+                
                 SizedBox(
                     height: 40,
                     width: 40,
@@ -75,10 +78,24 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontWeight: FontWeight.w600)),
               ],
             ),
-            titleSpacing: 0.0,
-            actions: <Widget>[
-              const Icon(Icons.call, color: Color.fromARGB(255, 246, 6, 86)),
               TextButton(
+                  onPressed: () async {
+                    final Uri url = Uri(scheme: 'tel', path: "7428430119");
+                    if (await canLaunchUrl(url)) {
+                      await launchUrl(url);
+                    } else {
+                      print("cannot lanch this number");
+                    };
+                  },
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                  ),
+                  child: const Icon(Icons.call,
+                      color: Color.fromARGB(255, 246, 6, 86))),
+              TextButton(
+                style: TextButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                  ),
                 onPressed: () {
                   //   Navigator.pushReplacement(
                   // context, MaterialPageRoute(builder: (context) => ProfilePage()));
@@ -98,6 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ],
+            
           ),
           backgroundColor: Colors.grey[100],
           body: Stack(children: [
@@ -166,7 +184,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                       style: TextButton.styleFrom(
                                         padding: EdgeInsets.zero,
                                       ),
-                                      // style: ButtonStyle(),
                                       onPressed: () {
                                         // Get.toNamed(Routes.getImageViewerRoute);
                                         Navigator.push(
@@ -231,72 +248,76 @@ class _HomeScreenState extends State<HomeScreen> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-
-                                          Row(
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 8.0),
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(30),
-                                                  child: Image.asset(
-                                                    'assets/image/profile.jpg',
-                                                    width: 50.0,
-                                                    height: 50.0,
-                                                    fit: BoxFit.fill,
+                                          TextButton(
+                                            onPressed: () {
+                                              Get.to(
+                                                  const ProfessionalProfile());
+                                            },
+                                            child: Row(
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 8.0),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            30),
+                                                    child: Image.asset(
+                                                      'assets/image/profile.jpg',
+                                                      width: 40.0,
+                                                      height: 40.0,
+                                                      fit: BoxFit.fill,
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-
-                                              Padding(
-                                                padding: const EdgeInsets.only(left:8.0),
-                                                child: TextButton(
-                                                                                          onPressed: () {
-                                                Get.to(
-                                                    const ProfessionalProfile());
-                                                                                          },
-                                                                                          child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  const Text(
-                                                    "Star wood works",
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Colors.black,
-                                                        fontSize: 15),
-                                                  ),
-                                                  Container(
-                                                    child: const Row(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          "Carpenter  ",
-                                                          style: TextStyle(
-                                                              color: Colors.grey,
-                                                              fontSize: 12),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 8.0),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      const Text(
+                                                        "Star wood works",
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: Colors.black,
+                                                            fontSize: 15),
+                                                      ),
+                                                      Container(
+                                                        child: const Row(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              "Carpenter  ",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  fontSize: 12),
+                                                            ),
+                                                            Text("Delhi",
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .grey,
+                                                                    fontSize:
+                                                                        12))
+                                                          ],
                                                         ),
-                                                        Text("Delhi",
-                                                            style: TextStyle(
-                                                                color:
-                                                                    Colors.grey,
-                                                                fontSize: 12))
-                                                      ],
-                                                    ),
-                                                  )
-                                                ],
-                                                                                          ),
-                                                                                        ),
-                                              ),
-                                            ],
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                          
                                           TextButton(
                                             onPressed: () {
                                               setState(() {

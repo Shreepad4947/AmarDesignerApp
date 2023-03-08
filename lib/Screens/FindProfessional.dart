@@ -1,6 +1,8 @@
 import "package:amardesigner/Data/SearchData.dart";
+import "package:amardesigner/Screens/Homepage/ProfessionalProfile.dart";
 import "package:amardesigner/widgets/AppBar.dart";
 import "package:flutter/material.dart";
+import "package:get/get.dart";
 import "package:popup_card/popup_card.dart";
 
 class FindProfessional extends StatefulWidget {
@@ -129,7 +131,7 @@ class _FindProfessionalState extends State<FindProfessional> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Card(
                             child: TextButton(
                               onPressed: () {
@@ -293,174 +295,179 @@ class _FindProfessionalState extends State<FindProfessional> {
                         itemCount: SearchData.length,
                         itemBuilder: (BuildContext ctxt, int index) {
                           return Padding(
-                            padding: const EdgeInsets.only(
+                            padding:  const EdgeInsets.only(
                                 bottom: 10, left: 5, right: 5),
-                            child: Card(
-                              color: Colors.white,
-                              child: Stack(children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      width: width,
-                                      height: 200,
-                                      child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(3),
-                                          child: Image.asset(
-                                            SearchData[index]["image"],
-                                            fit: BoxFit.fill,
-                                          )),
-                                    ),
-                                    Container(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 8.0, top: 40),
-                                              child: Text(
-                                                  SearchData[index]["title"],
-                                                  style: const TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 18)),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(5.0),
-                                              child: Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  Icon(Icons.star,
-                                                      color: Colors.yellow[700],
-                                                      size: 20),
-                                                  const SizedBox(width: 5),
-                                                  Container(
-                                                      width: width * 0.6,
-                                                      child: const Text(
-                                                          "5.0 (162 Reviews)",
-                                                          overflow:
-                                                              TextOverflow.clip,
-                                                          style: TextStyle(
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              color: Colors
-                                                                  .grey))),
-                                                ],
+                            child: TextButton(
+                              onPressed: () {
+                                                Get.to(const ProfessionalProfile());
+                                              },
+                              child: Card(
+                                color: Colors.white,
+                                child: Stack(children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        width: width,
+                                        height: 200,
+                                        child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(3),
+                                            child: Image.asset(
+                                              SearchData[index]["image"],
+                                              fit: BoxFit.fill,
+                                            )),
+                                      ),
+                                      Container(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 8.0, top: 40),
+                                                child: Text(
+                                                    SearchData[index]["title"],
+                                                    style: const TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 18)),
                                               ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(5.0),
-                                              child: Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  const Icon(Icons.location_on,
-                                                      color: Colors.black,
-                                                      size: 20),
-                                                  const SizedBox(width: 5),
-                                                  Container(
-                                                      width: width * 0.6,
-                                                      child: Text(
-                                                          SearchData[index]
-                                                              ["address"],
-                                                          overflow:
-                                                              TextOverflow.clip,
-                                                          style:
-                                                              const TextStyle(
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600,
-                                                                  color: Colors
-                                                                      .grey))),
-                                                ],
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(5.0),
+                                                child: Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    Icon(Icons.star,
+                                                        color: Colors.yellow[700],
+                                                        size: 20),
+                                                    const SizedBox(width: 5),
+                                                    Container(
+                                                        width: width * 0.6,
+                                                        child: const Text(
+                                                            "5.0 (162 Reviews)",
+                                                            overflow:
+                                                                TextOverflow.clip,
+                                                            style: TextStyle(
+                                                                fontSize: 14,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                color: Colors
+                                                                    .grey))),
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                            SizedBox(
-                                              width: width,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  SizedBox(
-                                                    width: width * 0.9,
-                                                    child: TextButton(
-                                                      onPressed: () {
-                                                        setState(() {
-                                                          MessegeButton = 1;
-                                                        });
-                                                      },
-                                                      child: const Card(
-                                                          color: Color.fromARGB(
-                                                              255, 246, 6, 86),
-                                                          child: Padding(
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    6.0),
-                                                            child: Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                Icon(
-                                                                    Icons
-                                                                        .email_sharp,
-                                                                    size: 12,
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(5.0),
+                                                child: Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    const Icon(Icons.location_on,
+                                                        color: Colors.black,
+                                                        size: 20),
+                                                    const SizedBox(width: 5),
+                                                    Container(
+                                                        width: width * 0.6,
+                                                        child: Text(
+                                                            SearchData[index]
+                                                                ["address"],
+                                                            overflow:
+                                                                TextOverflow.clip,
+                                                            style:
+                                                                const TextStyle(
+                                                                    fontSize: 14,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w600,
                                                                     color: Colors
-                                                                        .white),
-                                                                SizedBox(
-                                                                    width: 5),
-                                                                Text(
-                                                                  "Send Message",
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          13,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w600),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          )),
-                                                    ),
-                                                  ),
-                                                ],
+                                                                        .grey))),
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                          ],
+                                              SizedBox(
+                                                width: width,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    SizedBox(
+                                                      width: width * 0.9,
+                                                      child: TextButton(
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            MessegeButton = 1;
+                                                          });
+                                                        },
+                                                        child: const Card(
+                                                            color: Color.fromARGB(
+                                                                255, 246, 6, 86),
+                                                            child: Padding(
+                                                              padding:
+                                                                  EdgeInsets.all(
+                                                                      6.0),
+                                                              child: Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Icon(
+                                                                      Icons
+                                                                          .email_sharp,
+                                                                      size: 12,
+                                                                      color: Colors
+                                                                          .white),
+                                                                  SizedBox(
+                                                                      width: 5),
+                                                                  Text(
+                                                                    "Send Message",
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            13,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w600),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            )),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                const Positioned(
-                                  top: 160,
-                                  left: 20,
-                                  child: CircleAvatar(
-                                      radius: 40,
-                                      backgroundColor: Colors.grey,
-                                      backgroundImage:
-                                          AssetImage("assets/image/LoGo.jpg")),
-                                ),
-                              ]),
+                                    ],
+                                  ),
+                                  const Positioned(
+                                    top: 160,
+                                    left: 20,
+                                    child: CircleAvatar(
+                                        radius: 40,
+                                        backgroundColor: Colors.grey,
+                                        backgroundImage:
+                                            AssetImage("assets/image/LoGo.jpg")),
+                                  ),
+                                ]),
+                              ),
                             ),
                           );
                         }),

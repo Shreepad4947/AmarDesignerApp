@@ -1,19 +1,12 @@
-import 'package:amardesigner/API/models/login_request_model.dart';
+
 import 'package:amardesigner/Login/SignUpOtp.dart';
-import 'package:amardesigner/Screens/DashBoard/dashboard_page.dart';
 import 'package:amardesigner/Screens/Homepage/HomeScreen.dart';
 import 'package:amardesigner/middleware/route.dart';
-import 'package:amardesigner/widgets/AppBar.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:toast/toast.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 enum LoginScreen { ShowEnterMobileNo, ShowEnterOtp }
 
@@ -65,37 +58,66 @@ class _SignInNumState extends State<SignInNum> {
     }
   }
 
-  signIn(String email, String password) async {
-    setState(() {
-      isloading = true;
-    });
+  // signIn(String email, String password) async {
+  //   setState(() {
+  //     isloading = true;
+  //   });
+  //   try {
+  //     final uri = Uri.parse('https://etechnomate.com/gautam/login/');
+
+  //     final response = await http.post(
+  //       uri,
+  //       body: <String, String>{'email': email, 'password': password},
+  //     );
+  //     int statusCode = response.statusCode;
+  //     String responseBody = response.body;
+
+  //     if (statusCode == 200) {
+  //       setState(() {
+  //         isloading = false;
+  //       });
+  //       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+  //     content: Text("SignIn Success"),
+  //   ));
+  //       print("success");
+  //     }
+
+  //     print(responseBody);
+  //   } catch (e) {
+  //     print("error");
+  //   }
+  // }
+
+ 
+
+  Future<void> signIn() async {
+    final apiUrl = Uri.parse('http://193.46.199.225:3000/user/register');
+    final headers = {'Content-Type': 'application/json'};
+    final jsonBody = {
+      "email": emailController.text,
+      "password": passwordController.text
+    };
+    print(jsonBody);
+
     try {
-      final uri = Uri.parse('https://etechnomate.com/gautam/login/');
-
-      final response = await http.post(
-        uri,
-        body: <String, String>{'email': email, 'password': password},
-      );
-      int statusCode = response.statusCode;
-      String responseBody = response.body;
-
-      if (statusCode == 200) {
-        setState(() {
-          isloading = false;
-        });
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text("SignIn Success"),
-    ));
-        print("success");
+      final response = await http.post(apiUrl,
+          headers: headers, body: json.encode(jsonBody));
+      if (response.statusCode == 200) {
+        // Success
+        print(response.body);
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Sign In Successfully"),
+        ));
+        Get.off(const HomeScreen());
+      } else {
+        // Error handling
+        print('Request failed with status: ${response.statusCode}.');
       }
-
-      print(responseBody);
     } catch (e) {
-      print("error");
+      // Error handling
+      print('Error: $e');
     }
   }
-
-
 
   indicator() {
     return const Center(child: CircularProgressIndicator());
@@ -205,7 +227,7 @@ class _SignInNumState extends State<SignInNum> {
                                                     //         width: 1,
                                                     //         color:
                                                     //             Colors.grey))
-                                                                ),
+                                                    ),
                                                 width: 100,
                                                 child: const Padding(
                                                   padding: EdgeInsets.only(
@@ -216,7 +238,7 @@ class _SignInNumState extends State<SignInNum> {
                                                               FontWeight.w600,
                                                           fontSize: 15)),
                                                 )),
-                                                SizedBox(width:10),
+                                            const SizedBox(width: 10),
                                             Container(
                                               width: 200,
                                               child: TextField(
@@ -294,7 +316,7 @@ class _SignInNumState extends State<SignInNum> {
                                                     //         color:
                                                     //             Colors.grey)
                                                     //             )
-                                                                ),
+                                                    ),
                                                 width: 100,
                                                 child: const Padding(
                                                   padding: EdgeInsets.only(
@@ -303,23 +325,23 @@ class _SignInNumState extends State<SignInNum> {
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.w600,
-                                                          fontSize: 15)
-                                                          ),
+                                                          fontSize: 15)),
                                                 )),
-                                                SizedBox(width:10),
+                                            const SizedBox(width: 10),
                                             Container(
                                               width: 200,
-                                              child: const TextField(
+                                              child: TextField(
                                                 // keyboardType:
                                                 //     TextInputType.number,
-                                                // controller: mobileNoController,
-                                                style: TextStyle(
+                                                controller: passwordController,
+                                                style: const TextStyle(
                                                     decorationThickness: 0,
                                                     color: Colors.black54,
                                                     textBaseline: TextBaseline
                                                         .alphabetic),
                                                 textAlign: TextAlign.start,
-                                                decoration: InputDecoration(
+                                                decoration:
+                                                    const InputDecoration(
                                                   hintText:
                                                       "   at least 8 character",
                                                   hintStyle: TextStyle(
@@ -341,8 +363,7 @@ class _SignInNumState extends State<SignInNum> {
                                     child: GestureDetector(
                                       onTap: () {
                                         // Get.toNamed(Routes.getDashBoardRoute());
-                                        signIn(emailController.text,
-                                            passwordController.text);
+                                        signIn();
                                       },
                                       child: Container(
                                         alignment: Alignment.center,

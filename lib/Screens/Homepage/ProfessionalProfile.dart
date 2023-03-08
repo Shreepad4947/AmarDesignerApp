@@ -1,4 +1,5 @@
 import 'package:amardesigner/Data/SearchData.dart';
+import 'package:amardesigner/Screens/Homepage/ProjectDetails.dart';
 import 'package:amardesigner/Screens/Homepage/viewAll.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -101,17 +102,17 @@ class _ProfessionalProfileState extends State<ProfessionalProfile> {
                                     ),
                                   )),
                             ),
-                            const Card(
-                                color: Colors.white,
-                                elevation: 3,
-                                child: Padding(
-                                  padding: EdgeInsets.all(5.0),
-                                  child: Text(
-                                    "follow",
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 12),
-                                  ),
-                                )),
+                            // const Card(
+                            //     color: Colors.white,
+                            //     elevation: 3,
+                            //     child: Padding(
+                            //       padding: EdgeInsets.all(5.0),
+                            //       child: Text(
+                            //         "follow",
+                            //         style: TextStyle(
+                            //             color: Colors.black, fontSize: 12),
+                            //       ),
+                            //     )),
                           ],
                         ),
                       ),
@@ -191,57 +192,57 @@ class _ProfessionalProfileState extends State<ProfessionalProfile> {
                                   TextStyle(color: Colors.grey, fontSize: 10)),
                         ],
                       ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.home_outlined,
-                            color: Colors.grey,
-                            size: 15,
-                          ),
-                          SizedBox(width: 2),
-                          Text("Self Employed  ",
-                              style:
-                                  TextStyle(color: Colors.grey, fontSize: 10)),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.more_time_outlined,
-                            color: Colors.grey,
-                            size: 15,
-                          ),
-                          SizedBox(width: 2),
-                          Text("15 year",
-                              style:
-                                  TextStyle(color: Colors.grey, fontSize: 10)),
-                        ],
-                      ),
+                      // Row(
+                      //   children: [
+                      //     Icon(
+                      //       Icons.home_outlined,
+                      //       color: Colors.grey,
+                      //       size: 15,
+                      //     ),
+                      //     SizedBox(width: 2),
+                      //     Text("Self Employed  ",
+                      //         style:
+                      //             TextStyle(color: Colors.grey, fontSize: 10)),
+                      //   ],
+                      // ),
+                      // Row(
+                      //   children: [
+                      //     Icon(
+                      //       Icons.more_time_outlined,
+                      //       color: Colors.grey,
+                      //       size: 15,
+                      //     ),
+                      //     SizedBox(width: 2),
+                      //     Text("15 year",
+                      //         style:
+                      //             TextStyle(color: Colors.grey, fontSize: 10)),
+                      //   ],
+                      // ),
                     ],
                   ),
                 ),
                 const SizedBox(height: 10),
-                const Row(
-                  children: [
-                    SizedBox(width: 16),
-                    Text(
-                      "220 Followers",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 10),
-                    ),
-                    SizedBox(width: 5),
-                    Text(
-                      "22 Following",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 10),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
+                // const Row(
+                //   children: [
+                //     SizedBox(width: 16),
+                //     Text(
+                //       "220 Followers",
+                //       style: TextStyle(
+                //           color: Colors.black,
+                //           fontWeight: FontWeight.w600,
+                //           fontSize: 10),
+                //     ),
+                //     SizedBox(width: 5),
+                //     Text(
+                //       "22 Following",
+                //       style: TextStyle(
+                //           color: Colors.black,
+                //           fontWeight: FontWeight.w600,
+                //           fontSize: 10),
+                //     ),
+                //   ],
+                // ),
+                // const SizedBox(height: 10),
                 Row(
                   children: [
                     const SizedBox(width: 16),
@@ -270,7 +271,7 @@ class _ProfessionalProfileState extends State<ProfessionalProfile> {
                     )
                   ],
                 ),
-                const SizedBox(height: 8),
+                // const SizedBox(height: 8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -303,7 +304,7 @@ class _ProfessionalProfileState extends State<ProfessionalProfile> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 8),
+                // const SizedBox(height: 8),
                 SizedBox(
                   height: 260,
                   width: width,
@@ -312,76 +313,86 @@ class _ProfessionalProfileState extends State<ProfessionalProfile> {
                       itemCount: SearchData.length,
                       itemBuilder: (BuildContext ctxt, int index) {
                         return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Card(
-                            child: Container(
-                              width: width * 0.4,
-                              color: Colors.grey[100],
-                              child: Stack(children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      width: width * 0.4,
-                                      height: 150,
-                                      child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(3),
-                                          child: Image.asset(
-                                            SearchData[index]["image"],
-                                            fit: BoxFit.fill,
-                                          )),
-                                    ),
-                                    Container(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Text(SearchData[index]["title"],
-                                                overflow: TextOverflow.ellipsis,
-                                                style: const TextStyle(
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 16)),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(5.0),
-                                              child: Container(
-                                                  width: width * 0.4,
-                                                  child: const Text("16 Photos",
-                                                      overflow:
-                                                          TextOverflow.clip,
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          color: Colors.grey))),
-                                            ),
-                                          ],
+                          padding: const EdgeInsets.only(left:8.0),
+                          child: TextButton(
+                            onPressed: () {
+                              Get.to(ProjectDetails());
+                            },
+                            child: Card(
+                              child: Container(
+                                width: width * 0.4,
+                                color: Colors.grey[100],
+                                child: Stack(children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        width: width * 0.4,
+                                        height: 150,
+                                        child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(3),
+                                            child: Image.asset(
+                                              SearchData[index]["image"],
+                                              fit: BoxFit.fill,
+                                            )),
+                                      ),
+                                      Container(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text(SearchData[index]["title"],
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: const TextStyle(
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 16)),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(5.0),
+                                                child: Container(
+                                                    width: width * 0.4,
+                                                    child: const Text(
+                                                        "16 Photos",
+                                                        overflow:
+                                                            TextOverflow.clip,
+                                                        style: TextStyle(
+                                                            fontSize: 12,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            color:
+                                                                Colors.grey))),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Positioned(
-                                  top: 130,
-                                  left: 0,
-                                  child: Container(
-                                      width: width * 0.4,
-                                      color: Colors.grey.withOpacity(0.9),
-                                      child: const Text(
-                                          overflow: TextOverflow.ellipsis,
-                                          " Noida, Uttar Pradesh",
-                                          style: TextStyle(
-                                              fontSize: 11,
-                                              color: Colors.white))),
-                                ),
-                              ]),
+                                    ],
+                                  ),
+                                  Positioned(
+                                    top: 130,
+                                    left: 0,
+                                    child: Container(
+                                        width: width * 0.4,
+                                        color: Colors.grey.withOpacity(0.9),
+                                        child: const Text(
+                                            overflow: TextOverflow.ellipsis,
+                                            " Noida, Uttar Pradesh",
+                                            style: TextStyle(
+                                                fontSize: 11,
+                                                color: Colors.white))),
+                                  ),
+                                ]),
+                              ),
                             ),
                           ),
                         );
@@ -391,20 +402,19 @@ class _ProfessionalProfileState extends State<ProfessionalProfile> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    
                     Column(
                       children: [
                         const Padding(
-                          padding: EdgeInsets.only(left:16.0),
+                          padding: EdgeInsets.only(left: 16.0),
                           child: Text("26 reviews"),
                         ),
                         Row(children: [
                           const SizedBox(width: 16),
-                          Icon(Icons.star, color: Colors.yellow[600],size:14),
-                          Icon(Icons.star, color: Colors.yellow[600],size:14),
-                          Icon(Icons.star, color: Colors.yellow[600],size:14),
-                          Icon(Icons.star, color: Colors.yellow[600],size:14),
-                          Icon(Icons.star, color: Colors.yellow[600],size:14)
+                          Icon(Icons.star, color: Colors.yellow[600], size: 14),
+                          Icon(Icons.star, color: Colors.yellow[600], size: 14),
+                          Icon(Icons.star, color: Colors.yellow[600], size: 14),
+                          Icon(Icons.star, color: Colors.yellow[600], size: 14),
+                          Icon(Icons.star, color: Colors.yellow[600], size: 14)
                         ])
                       ],
                     ),
@@ -434,103 +444,126 @@ class _ProfessionalProfileState extends State<ProfessionalProfile> {
                         physics: const ScrollPhysics(
                             parent: NeverScrollableScrollPhysics()),
                         itemBuilder: (BuildContext ctxt, int index) => Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(color:Colors.grey[200],
-                              width: width,
-                              height: 170,
-                              child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(height:5),
-                                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                  color: Colors.grey[200],
+                                  width: width,
+                                  height: 170,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
+                                      SizedBox(height: 5),
                                       Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(left: 16.0),
-                                            child: ClipRRect(
-                                              borderRadius: BorderRadius.circular(30),
-                                              child: Image.asset(
-                                                'assets/image/profile.jpg',
-                                                width: 40.0,
-                                                height: 40.0,
-                                                fit: BoxFit.fill,
+                                          Row(
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 16.0),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(30),
+                                                  child: Image.asset(
+                                                    'assets/image/profile.jpg',
+                                                    width: 40.0,
+                                                    height: 40.0,
+                                                    fit: BoxFit.fill,
+                                                  ),
+                                                ),
                                               ),
-                                            ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 8.0),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    const Text(
+                                                      "HU- 544765474",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.black,
+                                                          fontSize: 13),
+                                                    ),
+                                                    Container(
+                                                      child: const Text(
+                                                        "Client  ",
+                                                        style: TextStyle(
+                                                            color: Colors.grey,
+                                                            fontSize: 12),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                           Padding(
-                                        padding: const EdgeInsets.only(left: 8.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            const Text(
-                                              "HU- 544765474",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.black,
-                                                  fontSize: 13),
+                                            padding: const EdgeInsets.only(
+                                                right: 16.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Row(children: [
+                                                  Icon(Icons.star,
+                                                      color: Colors.yellow[600],
+                                                      size: 13),
+                                                  Icon(Icons.star,
+                                                      color: Colors.yellow[600],
+                                                      size: 13),
+                                                  Icon(Icons.star,
+                                                      color: Colors.yellow[600],
+                                                      size: 13),
+                                                  Icon(Icons.star,
+                                                      color: Colors.yellow[600],
+                                                      size: 13),
+                                                  Icon(Icons.star,
+                                                      color: Colors.yellow[600],
+                                                      size: 13)
+                                                ]),
+                                                const Text("Oct 2 2022",
+                                                    style: TextStyle(
+                                                        fontSize: 12)),
+                                              ],
                                             ),
-                                            Container(
-                                              child: const Text(
-                                                "Client  ",
-                                                style: TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 12),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
+                                          ),
                                         ],
                                       ),
-                                      
-                                      Padding(
-                                        padding: const EdgeInsets.only(right:16.0),
-                                        child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Row(children: [
-                                              Icon(Icons.star,
-                                                  color: Colors.yellow[600],size:13),
-                                              Icon(Icons.star,
-                                                  color: Colors.yellow[600],size:13),
-                                              Icon(Icons.star,
-                                                  color: Colors.yellow[600],size:13),
-                                              Icon(Icons.star,
-                                                  color: Colors.yellow[600],size:13),
-                                              Icon(Icons.star,
-                                                  color: Colors.yellow[600],size:13)
-                                            ]),
-                                            const Text("Oct 2 2022",style:TextStyle(fontSize: 12)),
-                                          ],
-                                        ),
+                                      const Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 16.0, right: 16),
+                                        child: Text(
+                                            "I got my House designed by Gagandeep. The designs created are as per our taste and shared requirements. They have really good hand in",
+                                            style: TextStyle(fontSize: 10)),
                                       ),
+                                      const Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 16.0, right: 16),
+                                        child: Text("Read More",
+                                            style: TextStyle(
+                                                fontSize: 10,
+                                                color: Color.fromARGB(
+                                                    255, 246, 6, 86))),
+                                      ),
+                                      const Padding(
+                                        padding: EdgeInsets.only(left: 16.0),
+                                        child: Row(children: [
+                                          Icon(Icons.thumb_up_alt_outlined,
+                                              size: 15),
+                                          SizedBox(width: 5),
+                                          Text("Like")
+                                        ]),
+                                      )
                                     ],
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.only(left:16.0,right:16),
-                                    child: Text("I got my House designed by Gagandeep. The designs created are as per our taste and shared requirements. They have really good hand in"
-                                    ,style:TextStyle(fontSize: 10)),
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.only(left:16.0,right:16),
-                                    child: Text("Read More"
-                                    ,style:TextStyle(fontSize: 10,color: Color.fromARGB(255, 246, 6, 86))),
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.only(left
-                                    :16.0),
-                                    child: Row(children:[
-                                      Icon(Icons.thumb_up_alt_outlined,size:15),
-                                      SizedBox(width:5),
-                                      Text("Like")
-                                    ]),
-                                  )
-                                ],
-                              )),
-                        )))
+                                  )),
+                            )))
               ],
             ),
             messageClick == 1

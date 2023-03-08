@@ -4,6 +4,7 @@ import 'package:amardesigner/Login/profile_page.dart';
 import 'package:amardesigner/Screens/DesignIdeas/DesignIdeas1.dart';
 import 'package:amardesigner/Screens/Homepage/HomeScreen.dart';
 import 'package:amardesigner/Screens/FindProfessional.dart';
+import 'package:amardesigner/Screens/Static%20Pages/MorePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,14 +31,14 @@ class _DashboardPageState extends State<DashboardPage> {
           body: SafeArea(
             child: IndexedStack(
               index: controller.tabIndex,
-              children:  [
+              children:  const [
                 HomeScreen(),
                 FindProfessional(),
                 DesignIdeas1(),
                 //  ProfileSettingsScreen(),
                 // user == null? 
                 // SignInNum(),
-                SignInNum()
+                MorePage()
                 // ProfilePage()
               ],
             ),
@@ -47,8 +48,8 @@ class _DashboardPageState extends State<DashboardPage> {
             selectedItemColor: Color.fromARGB(255, 246, 6, 86),
             onTap: controller.changeTabIndex,
             currentIndex: controller.tabIndex,
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
+            showSelectedLabels: true,
+            showUnselectedLabels: true,
             type: BottomNavigationBarType.fixed,
             backgroundColor: Colors.white,
             elevation: 0,

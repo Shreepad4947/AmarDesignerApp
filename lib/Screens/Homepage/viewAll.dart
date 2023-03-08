@@ -1,4 +1,5 @@
 import 'package:amardesigner/Data/SearchData.dart';
+import 'package:amardesigner/Screens/Homepage/ProjectDetails.dart';
 import 'package:amardesigner/middleware/route.dart';
 import 'package:amardesigner/widgets/AppBar.dart';
 import 'package:amardesigner/widgets/MyDrawer.dart';
@@ -29,7 +30,7 @@ class _ViewAllPageState extends State<ViewAllPage> {
             style: TextStyle(fontWeight: FontWeight.w600)),
       ),
       bottomSheet: Padding(
-        padding: EdgeInsets.only(bottom: 8.0, left: 8, right: 8),
+        padding: const EdgeInsets.only(bottom: 8.0, left: 8, right: 8),
         child: SizedBox(
           width: width,
           child: SizedBox(
@@ -133,7 +134,7 @@ class _ViewAllPageState extends State<ViewAllPage> {
                             color: Colors.yellow[600],
                             size: 15,
                           ),
-                          Text(
+                          const Text(
                             " 26 Review and Rating",
                             style: TextStyle(color: Colors.black, fontSize: 10),
                           )
@@ -143,7 +144,7 @@ class _ViewAllPageState extends State<ViewAllPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               SizedBox(
                 height: height * 0.7,
                 width: width,
@@ -152,75 +153,82 @@ class _ViewAllPageState extends State<ViewAllPage> {
                   itemCount: SearchData.length,
                   itemBuilder: (BuildContext ctxt, int index) {
                     return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Card(
-                        child: Container(
-                          width: width * 0.5,
-                          height: 350,
-                          color: Colors.grey[100],
-                          child: Stack(children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  width: width * 0.5,
-                                  height: 110,
-                                  child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(3),
-                                      child: Image.asset(
-                                        SearchData[index]["image"],
-                                        fit: BoxFit.fill,
-                                      )),
-                                ),
-                                const SizedBox(height: 5),
-                                Container(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(6.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Text(SearchData[index]["title"],
-                                            overflow: TextOverflow.ellipsis,
-                                            style: const TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 14)),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 5.0),
-                                          child: Container(
-                                              width: width * 0.4,
-                                              child: const Text("16 Photos",
-                                                  overflow: TextOverflow.clip,
-                                                  style: TextStyle(
-                                                      fontSize: 10,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      color: Colors.grey))),
-                                        ),
-                                      ],
+                      padding: EdgeInsets.all(8.0),
+                      child: TextButton(
+                        style: TextButton.styleFrom(padding: EdgeInsets.zero),
+                        onPressed: () {
+                          Get.to(ProjectDetails());
+                        },
+                        child: Card(
+                          child: Container(
+                            width: width * 0.5,
+                            height: 350,
+                            color: Colors.grey[100],
+                            child: Stack(children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    width: width * 0.5,
+                                    height: 110,
+                                    child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(3),
+                                        child: Image.asset(
+                                          SearchData[index]["image"],
+                                          fit: BoxFit.fill,
+                                        )),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Container(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(6.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Text(SearchData[index]["title"],
+                                              overflow: TextOverflow.ellipsis,
+                                              style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 14)),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 5.0),
+                                            child: Container(
+                                                width: width * 0.4,
+                                                child: const Text("16 Photos",
+                                                    overflow: TextOverflow.clip,
+                                                    style: TextStyle(
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        color: Colors.grey))),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Positioned(
-                              top: 100,
-                              left: 0,
-                              child: Container(
-                                  width: width * 0.5,
-                                  color: Colors.grey.withOpacity(0.9),
-                                  child: const Text(
-                                      overflow: TextOverflow.ellipsis,
-                                      " Noida, Uttar Pradesh",
-                                      style: TextStyle(
-                                          fontSize: 11, color: Colors.white))),
-                            ),
-                          ]),
+                                ],
+                              ),
+                              Positioned(
+                                top: 100,
+                                left: 0,
+                                child: Container(
+                                    width: width * 0.5,
+                                    color: Colors.grey.withOpacity(0.9),
+                                    child: const Text(
+                                        overflow: TextOverflow.ellipsis,
+                                        " Noida, Uttar Pradesh",
+                                        style: TextStyle(
+                                            fontSize: 11,
+                                            color: Colors.white))),
+                              ),
+                            ]),
+                          ),
                         ),
                       ),
                     );
@@ -232,12 +240,12 @@ class _ViewAllPageState extends State<ViewAllPage> {
             ],
           ),
           messageClick == 1
-                ? Positioned(
-                    // top: height * 0.2,
-                    // left: 17,
-                    child: PopUpMessage(),
-                  )
-                : Container(),
+              ? Positioned(
+                  // top: height * 0.2,
+                  // left: 17,
+                  child: PopUpMessage(),
+                )
+              : Container(),
         ]),
       ),
     );

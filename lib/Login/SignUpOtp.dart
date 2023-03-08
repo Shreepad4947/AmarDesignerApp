@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:amardesigner/Login/BasicInfo.dart';
 import 'package:amardesigner/Login/SignInOtp.dart';
+import 'package:amardesigner/Screens/Homepage/HomeScreen.dart';
 import 'package:amardesigner/middleware/route.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -54,102 +57,138 @@ class _SignUpNumState extends State<SignUpNum> {
     }
   }
 
+  
+
+  Future<void> SignUp() async {
+    final apiUrl = Uri.parse('http://193.46.199.225:3000/user/register');
+    final headers = {'Content-Type': 'application/json'};
+    final jsonBody = {
+      'name': usernameController.text,
+      'mobile': mobileNoController.text,
+      "email": emailController.text,
+      "password": passwordController.text
+    };
+    print(jsonBody);
+
+    try {
+      final response = await http.post(apiUrl,
+          headers: headers, body: json.encode(jsonBody));
+      if (response.statusCode == 200) {
+        // Success
+        print(response.body);
+        ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text("Sign Up Successfully"),
+                            ));
+        Get.off(BasicInfo());
+      } else {
+        // Error handling
+        print('Request failed with status: ${response.statusCode}.');
+      }
+    } catch (e) {
+      // Error handling
+      print('Error: $e');
+    }
+  }
+
   verifyPhoneNum() async {
-    setState(() {
-      isloading = true;
-    });
+    // // setState(() {
+    // //   isloading = true;
+    // // });
 
-    await _auth.verifyPhoneNumber(
+    // // await _auth.verifyPhoneNumber(
 
-        phoneNumber: "+91${mobileNoController.text}",
-        verificationCompleted: (AuthCredential phoneAuthCredential) async {
-          setState(() {
-            isloading = false;
-            verificationCompleted = true;
-          });
-          print(phoneAuthCredential.providerId);
-        },
-        verificationFailed: (verificationFailed) {
-          setState(() {
-            isloading = false;
-          });
-          print(verificationFailed);
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text("OTP limit Exeeded"),
-          ));
-        },
-        codeSent: (verificationID, resendingToken) async {
-          setState(() {
-            isloading = false;
-            currentState = LoginScreen.ShowEnterOtp;
-            this.verificationID = verificationID;
-          });
-        },
-        codeAutoRetrievalTimeout: (verificationID) async {});
+    // //     phoneNumber: "+91${mobileNoController.text}",
+    // //     verificationCompleted: (AuthCredential phoneAuthCredential) async {
+    // //       setState(() {
+    // //         isloading = false;
+    // //         verificationCompleted = true;
+    // //       });
+    // //       print(phoneAuthCredential.providerId);
+    // //     },
+    // //     verificationFailed: (verificationFailed) {
+    // //       setState(() {
+    // //         isloading = false;
+    // //       });
+    // //       print(verificationFailed);
+    // //       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+    // //         content: Text("OTP limit Exeeded"),
+    // //       ));
+    // //     },
+    // //     codeSent: (verificationID, resendingToken) async {
+    // //       setState(() {
+    // //         isloading = false;
+    // //         currentState = LoginScreen.ShowEnterOtp;
+    // //         this.verificationID = verificationID;
+    // //       });
+    // //     },
+    // //     codeAutoRetrievalTimeout: (verificationID) async {});
+    //       /
   }
 
   verifyOtp_SignUp() {
-    setState(() {
-      isloading = true;
-    });
-    AuthCredential phoneAuthCredential = PhoneAuthProvider.credential(
-      verificationId: verificationID,
-      smsCode: finalOTP,
-    );
-    signInwithPhoneAuthCred(phoneAuthCredential, usernameController.text);
+    // // setState(() {
+    // //   isloading = true;
+    // // });
+    // // AuthCredential phoneAuthCredential = PhoneAuthProvider.credential(
+    // //   verificationId: verificationID,
+    // //   smsCode: finalOTP,
+    // // );
+    // // signInwithPhoneAuthCred(phoneAuthCredential, usernameController.text);
+    // /
   }
+// /
+//   // Future<User?> signInwithPhoneAuthCred(
+//   //     AuthCredential phoneauthCredential, String usernameController) async {
+//   //   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<User?> signInwithPhoneAuthCred(
-      AuthCredential phoneauthCredential, String usernameController) async {
-    FirebaseFirestore _firestore = FirebaseFirestore.instance;
+//   //   try {
+//   //     Map<String, String> userInfoMap = {
+//   //       "phone": mobileNoController.text,
+//   //     };
 
-    try {
-      Map<String, String> userInfoMap = {
-        "phone": mobileNoController.text,
-      };
+//   //     UserCredential userCrendetial =
+//   //         await _auth.signInWithCredential(phoneauthCredential);
 
-      UserCredential userCrendetial =
-          await _auth.signInWithCredential(phoneauthCredential);
+//   //         final uri = Uri.parse('https://etechnomate.com/gautam/login/');
 
-          final uri = Uri.parse('https://etechnomate.com/gautam/login/');
+//   //     final response = await http.post(
+//   //       uri,
+//   //       body: <String, String>{'name': usernameController,
+//   //                              'mobile': mobileNoController.text,
+//   //                             'email': emailController.text,
+//   //                             'password': passwordController.text},
+//   //     );
+//   //     int statusCode = response.statusCode;
+//   //     String responseBody = response.body;
 
-      final response = await http.post(
-        uri,
-        body: <String, String>{'name': usernameController,
-                               'mobile': mobileNoController.text,
-                              'email': emailController.text,
-                              'password': passwordController.text},
-      );
-      int statusCode = response.statusCode;
-      String responseBody = response.body; 
+//   //     userCrendetial.user!.updateDisplayName(usernameController);
 
-      userCrendetial.user!.updateDisplayName(usernameController);
-
-      if (userCrendetial.user != null && statusCode == 200) {
-        setState(() {
-          isloading = false;
-        });
-       print("Success signUp");
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        prefs.setString('phone', '');
-        // userNumber = mobileNoController.text;
-        userNumber = mobileNoController.text;
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const BasicInfo()));
-        setState(() {
-          usersignedIn = true;
-        });
-      }
-    } on FirebaseAuthException catch (e) {
-      print(e.message);
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text("Some Error occured ,Try Again"),
-      ));
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => SignInNum()));
-    }
-    return null;
-  }
+//   //     if (userCrendetial.user != null && statusCode == 200) {
+//   //       setState(() {
+//   //         isloading = false;
+//   //       });
+//   //      print("Success signUp");
+//   //       SharedPreferences prefs = await SharedPreferences.getInstance();
+//   //       prefs.setString('phone', '');
+//   //       // userNumber = mobileNoController.text;
+//   //       userNumber = mobileNoController.text;
+//   //       Navigator.pushReplacement(
+//   //           context, MaterialPageRoute(builder: (context) => const BasicInfo()));
+//   //       setState(() {
+//   //         usersignedIn = true;
+//   //       });
+//   //     }
+//   //   } on FirebaseAuthException catch (e) {
+//   //     print(e.message);
+//   //     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+//   //       content: Text("Some Error occured ,Try Again"),
+//   //     ));
+//   //     Navigator.pushReplacement(
+//   //         context, MaterialPageRoute(builder: (context) => SignInNum()));
+//   //   }
+//   //   return null;
+//   // }
 
   indicator() {
     return const Center(child: CircularProgressIndicator());
@@ -159,7 +198,7 @@ class _SignUpNumState extends State<SignUpNum> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        elevation: 0, 
+        elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () => {Get.toNamed(Routes.getDashBoardRoute())},
@@ -183,7 +222,8 @@ class _SignUpNumState extends State<SignUpNum> {
                             Navigator.pushReplacement(
                                 context,
                                 PageRouteBuilder(
-                                    pageBuilder: (context,an1,an2) => SignInNum(),
+                                    pageBuilder: (context, an1, an2) =>
+                                        SignInNum(),
                                     transitionDuration: Duration.zero,
                                     reverseTransitionDuration: Duration.zero));
                           },
@@ -253,7 +293,7 @@ class _SignUpNumState extends State<SignUpNum> {
                                                   //     bottom: BorderSide(
                                                   //         width: 1,
                                                   //         color: Colors.grey))
-                                                          ),
+                                                  ),
                                               width: 100,
                                               child: const Padding(
                                                 padding: EdgeInsets.only(
@@ -264,13 +304,17 @@ class _SignUpNumState extends State<SignUpNum> {
                                                             FontWeight.w600,
                                                         fontSize: 16)),
                                               )),
-                                              SizedBox(width:10),
+                                          SizedBox(width: 10),
                                           Container(
                                             width: 200,
                                             child: TextField(
                                               keyboardType: TextInputType.name,
                                               controller: usernameController,
-                                              style: TextStyle( decorationThickness: 0, color: Colors.black54,textBaseline:TextBaseline.alphabetic ),
+                                              style: TextStyle(
+                                                  decorationThickness: 0,
+                                                  color: Colors.black54,
+                                                  textBaseline:
+                                                      TextBaseline.alphabetic),
                                               textAlign: TextAlign.start,
                                               // style:TextStyle(color: Colors.red,height: 0),
                                               decoration: const InputDecoration(
@@ -296,7 +340,7 @@ class _SignUpNumState extends State<SignUpNum> {
                                                   //     bottom: BorderSide(
                                                   //         width: 1,
                                                   //         color: Colors.grey))
-                                                          ),
+                                                  ),
                                               width: 100,
                                               child: const Padding(
                                                 padding: EdgeInsets.only(
@@ -307,18 +351,23 @@ class _SignUpNumState extends State<SignUpNum> {
                                                             FontWeight.w600,
                                                         fontSize: 16)),
                                               )),
-                                              SizedBox(width:10),
+                                          SizedBox(width: 10),
                                           Container(
                                             width: 200,
                                             child: TextField(
                                               keyboardType: TextInputType.name,
                                               controller: emailController,
-                                              style: const TextStyle( decorationThickness: 0, color: Colors.black54,textBaseline:TextBaseline.alphabetic ),
+                                              style: const TextStyle(
+                                                  decorationThickness: 0,
+                                                  color: Colors.black54,
+                                                  textBaseline:
+                                                      TextBaseline.alphabetic),
                                               textAlign: TextAlign.start,
                                               decoration: const InputDecoration(
                                                 hintText: "   required",
                                                 hintStyle: TextStyle(
-                                                  textBaseline: TextBaseline.ideographic,
+                                                    textBaseline: TextBaseline
+                                                        .ideographic,
                                                     color: Colors.grey,
                                                     fontSize: 13,
                                                     fontWeight:
@@ -336,7 +385,7 @@ class _SignUpNumState extends State<SignUpNum> {
                                                   //     bottom: BorderSide(
                                                   //         width: 1,
                                                   //         color: Colors.grey))
-                                                          ),
+                                                  ),
                                               width: 100,
                                               child: const Padding(
                                                 padding: EdgeInsets.only(
@@ -347,11 +396,15 @@ class _SignUpNumState extends State<SignUpNum> {
                                                             FontWeight.w600,
                                                         fontSize: 16)),
                                               )),
-                                              SizedBox(width:10),
+                                          SizedBox(width: 10),
                                           Container(
                                             width: 200,
                                             child: TextFormField(
-                                              style: TextStyle( decorationThickness: 0, color: Colors.black54,textBaseline:TextBaseline.alphabetic ),
+                                              style: TextStyle(
+                                                  decorationThickness: 0,
+                                                  color: Colors.black54,
+                                                  textBaseline:
+                                                      TextBaseline.alphabetic),
                                               keyboardType:
                                                   TextInputType.number,
                                               controller: mobileNoController,
@@ -376,7 +429,7 @@ class _SignUpNumState extends State<SignUpNum> {
                                                   //     bottom: BorderSide(
                                                   //         width: 1,
                                                   //         color: Colors.grey))
-                                                          ),
+                                                  ),
                                               width: 100,
                                               child: const Padding(
                                                 padding: EdgeInsets.only(
@@ -387,7 +440,7 @@ class _SignUpNumState extends State<SignUpNum> {
                                                             FontWeight.w600,
                                                         fontSize: 16)),
                                               )),
-                                              SizedBox(width:10),
+                                          SizedBox(width: 10),
                                           Container(
                                             width: 200,
                                             child: TextFormField(
@@ -400,7 +453,8 @@ class _SignUpNumState extends State<SignUpNum> {
                                                     "   at least 8 character",
                                                 hintStyle: TextStyle(
                                                     color: Colors.grey,
-                                                    decoration: TextDecoration.none,
+                                                    decoration:
+                                                        TextDecoration.none,
                                                     decorationThickness: 0,
                                                     fontSize: 13,
                                                     fontWeight:
@@ -417,11 +471,11 @@ class _SignUpNumState extends State<SignUpNum> {
                                     width: double.infinity,
                                     child: GestureDetector(
                                       onTap: () {
-                                         setState(() {
-                                isloading = true;
-                                verifyPhoneNum();
-                                // currentState = LoginScreen.ShowEnterOtp;
-                              });
+                                        setState(() {
+                                          // isloading = true;
+                                          // verifyPhoneNum();
+                                          SignUp();
+                                        });
                                       },
                                       child: Container(
                                         alignment: Alignment.center,
@@ -439,7 +493,8 @@ class _SignUpNumState extends State<SignUpNum> {
                                           ],
                                           borderRadius:
                                               BorderRadius.circular(30),
-                                          color: const Color.fromARGB(255, 246, 6, 86),
+                                          color: const Color.fromARGB(
+                                              255, 246, 6, 86),
                                         ),
                                         child: const Text(
                                           "SIGN UP",
@@ -646,7 +701,10 @@ class _SignUpNumState extends State<SignUpNum> {
                           width: 220,
                           child: const Text(
                             "OTP Verification",
-                            style: TextStyle(color: Colors.black, fontSize: 20,fontWeight: FontWeight.w600),
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -668,7 +726,7 @@ class _SignUpNumState extends State<SignUpNum> {
                         ),
                         Container(height: 15),
                         Padding(
-                          padding: const EdgeInsets.only(left:20.0,right:20),
+                          padding: const EdgeInsets.only(left: 20.0, right: 20),
                           child: Container(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -693,7 +751,8 @@ class _SignUpNumState extends State<SignUpNum> {
                                       ),
                                       focusedBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                          color: Color.fromARGB(255, 246, 6, 86),
+                                          color:
+                                              Color.fromARGB(255, 246, 6, 86),
                                           width: 2.0,
                                         ),
                                       ),
@@ -706,7 +765,7 @@ class _SignUpNumState extends State<SignUpNum> {
                         ),
                         Container(height: 30),
                         const Padding(
-                           padding: EdgeInsets.only(left:20.0,right:20),
+                          padding: EdgeInsets.only(left: 20.0, right: 20),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -733,12 +792,14 @@ class _SignUpNumState extends State<SignUpNum> {
                             child: TextButton(
                                 child: const Text(
                                   "VERIFY",
-                                  style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600),
                                 ),
                                 onPressed: () {
-          //                         Navigator.pushReplacement(
-          // context, MaterialPageRoute(builder: (context) => const BasicInfo()));
-    
+                                  //                         Navigator.pushReplacement(
+                                  // context, MaterialPageRoute(builder: (context) => const BasicInfo()));
+
                                   setState(() {
                                     finalOTP = _otpList.join();
                                     // print(finalOTP);
@@ -767,12 +828,9 @@ class _SignUpNumState extends State<SignUpNum> {
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
-                :
-                 currentState == LoginScreen.ShowEnterMobileNo
-                    ?
-                showMobileNowidget(context)
-        // ));
-        :
-    showOTPWidget(context)));
+                : currentState == LoginScreen.ShowEnterMobileNo
+                    ? showMobileNowidget(context)
+                    // ));
+                    : showOTPWidget(context)));
   }
 }

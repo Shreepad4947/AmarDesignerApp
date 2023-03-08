@@ -1,9 +1,14 @@
 import 'package:amardesigner/Data/InteriorDesigns.dart';
 import 'package:amardesigner/Data/SearchData.dart';
+import 'package:amardesigner/Screens/DesignIdeas/GetQuote.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
 class DesignIdeas3 extends StatefulWidget {
   const DesignIdeas3({super.key});
@@ -18,6 +23,10 @@ class _DesignIdeas3State extends State<DesignIdeas3>
   double width0 = 0; // single item length
   static const listLength = 5;
   int move = 0;
+
+  Future<void> share() async {
+    Share.share("Mr. Himanshu's House,  Link : www.amardesigner.com",subject: "Check this Designs",);
+  }
 
   int activeIndex = 0;
   final List<String> imageList = [
@@ -97,22 +106,27 @@ class _DesignIdeas3State extends State<DesignIdeas3>
               //         textAlign: TextAlign.center,
               //       ),
               //     )),
-              Container(
-                  width: width * 0.5,
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20),
+              TextButton(
+                onPressed: () {
+                  Get.to(const GetQuote());
+                },
+                child: Container(
+                    width: width * 0.5,
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(20),
+                        ),
+                        color: Color.fromARGB(255, 246, 6, 86)),
+                    child: const Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Text(
+                        "Get Free Quote",
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
                       ),
-                      color: Color.fromARGB(255, 246, 6, 86)),
-                  child: const Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text(
-                      "Get Free Quote",
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                    ),
-                  )),
+                    )),
+              ),
               const SizedBox(
                 width: 20,
               ),
@@ -153,68 +167,91 @@ class _DesignIdeas3State extends State<DesignIdeas3>
                           return SingleChildScrollView(
                             child: SizedBox(
                               width: width,
-                              child: Column(
-                                children: [
-                                  Container(
-                                    width: width,
-                                    child: Stack(children: [
-                                      buildImageSlider(),
-                                      Positioned(
-                                          left: 0,
-                                          height: height * 0.5,
-                                          child: buildButtonLeft()),
-                                      Positioned(
-                                          right: 0,
-                                          height: height * 0.5,
-                                          child: buildButtonRight()),
-                                      Positioned(
-                                          bottom: 10,
-                                          left: width * 0.3,
-                                          child: buildIndicator()),
-                                    ]),
-                                  ),
-                                  Container(
-                                    height: height * 0.4,
-                                    child: SingleChildScrollView(
-                                      child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            const SizedBox(
-                                              height: 20,
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 10.0, right: 10),
-                                              child: Text(
-                                                InteriorDesigns[index]['Info'],
-                                                style: const TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.black,
-                                                    fontSize: 17),
-                                                textAlign: TextAlign.start,
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              height: 20,
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 10, right: 10),
-                                              child: Text(
-                                                  InteriorDesigns[index]
-                                                      ['brief'],
-                                                  textAlign: TextAlign.justify,
-                                                  style: TextStyle(
-                                                      color: Colors.grey)),
-                                            ),
-                                          ]),
+                              child: Stack(children: [
+                                Column(
+                                  children: [
+                                    Container(
+                                      width: width,
+                                      child: Stack(children: [
+                                        buildImageSlider(),
+                                        Positioned(
+                                            left: 0,
+                                            height: height * 0.5,
+                                            child: buildButtonLeft()),
+                                        Positioned(
+                                            right: 0,
+                                            height: height * 0.5,
+                                            child: buildButtonRight()),
+                                        Positioned(
+                                            bottom: 10,
+                                            left: width * 0.3,
+                                            child: buildIndicator()),
+                                      ]),
                                     ),
+                                    Container(
+                                      height: height * 0.4,
+                                      child: SingleChildScrollView(
+                                        child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 10.0, right: 10),
+                                                child: SizedBox(
+                                                  width: width * 0.8,
+                                                  child: Text(
+                                                    InteriorDesigns[index]
+                                                        ['Info'],
+                                                    style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: Colors.black,
+                                                        fontSize: 17),
+                                                    textAlign: TextAlign.start,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 10, right: 10),
+                                                child: Text(
+                                                    InteriorDesigns[index]
+                                                        ['brief'],
+                                                    textAlign:
+                                                        TextAlign.justify,
+                                                    style: const TextStyle(
+                                                        color: Colors.grey)),
+                                              ),
+                                            ]),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Positioned(
+                                  right: 0,
+                                  top: height * 0.49,
+                                  child: TextButton(
+                                    onPressed: () {
+                                      share();
+                                    },
+                                    child: Container(
+                                        height: 40,
+                                        width: 40,
+                                        child: Image.asset(
+                                          "assets/image/Logo/whatsapp.jpg",
+                                        )),
                                   ),
-                                ],
-                              ),
+                                )
+                              ]),
                             ),
                           );
                         })),

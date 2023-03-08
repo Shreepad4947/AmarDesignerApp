@@ -89,7 +89,7 @@ class _DesignIdeas1State extends State<DesignIdeas1> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               
-              SizedBox(height: 20),
+              // SizedBox(height: 10),
               const Padding(
                 padding: EdgeInsets.only(left: 10.0, top: 8, bottom: 8),
                 child: Text("Categories",
@@ -115,7 +115,6 @@ class _DesignIdeas1State extends State<DesignIdeas1> {
                           width:width*0.5,
                           height:200,
                           child: Card(
-                           
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [

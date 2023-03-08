@@ -10,6 +10,14 @@ class BasicInfo extends StatefulWidget {
 }
 
 class _BasicInfoState extends State<BasicInfo> {
+
+TextEditingController companyNameController = TextEditingController();
+TextEditingController categoryController = TextEditingController();
+TextEditingController addressController = TextEditingController();
+TextEditingController stateNameController = TextEditingController();
+TextEditingController cityNameController = TextEditingController();
+TextEditingController pincodeNameController = TextEditingController();
+
   String selectedOption = "";
   String _dropDownValue = "";
   final List<String> _locations = [
@@ -30,10 +38,10 @@ class _BasicInfoState extends State<BasicInfo> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => {},
-        ),
+        // leading: IconButton(
+        //   icon: const Icon(Icons.arrow_back),
+        //   onPressed: () => {},
+        // ),
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20),
